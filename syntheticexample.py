@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from syntheticexamplestuff import *
 import numpy as np
+from PIL import Image
 ###############################################################
 # user config options:
 niters = 100
@@ -114,12 +115,13 @@ plt.yticks( arange(0, 60, 10), ('', '', '', '', '', '') )
 
 # Estimated locations:
 ax = fig.add_subplot(513)
-ax.imshow(array([map(lambda x: x, moment['estspec']) for moment in results]).T, aspect='auto', interpolation='nearest', cmap=cm.binary)
+# print("$$$$$$$$$$$$$$$$$$$", array([list(map(lambda x: min(x,1.0), moment['estspec'])) for moment in results]).T)
+ax.imshow(array([list(map(lambda x: min(x,1.0), moment['estspec'])) for moment in results]).T, aspect='auto', interpolation='nearest', cmap=cm.binary)
 plt.ylabel('Estimated', fontsize='x-small')
 plt.xticks( fontsize='x-small' )
 plt.yticks( arange(0, 60, 10), ('', '', '', '', '', '') )
 ax = fig.add_subplot(514)
-ax.imshow(array([map(lambda x: x, moment['estspec001']) for moment in results]).T, aspect='auto', interpolation='nearest', cmap=cm.binary)
+ax.imshow(array([list(map(lambda x: min(x,1.0), moment['estspec001'])) for moment in results]).T, aspect='auto', interpolation='nearest', cmap=cm.binary)
 plt.ylabel('Estimated\n(no vibrato)', fontsize='x-small')
 plt.xticks( fontsize='x-small' )
 plt.yticks( arange(0, 60, 10), ('', '', '', '', '', '') )
